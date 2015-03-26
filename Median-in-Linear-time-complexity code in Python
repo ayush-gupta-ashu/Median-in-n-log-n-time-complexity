@@ -1,4 +1,4 @@
-# Median-in-n-log-n-time-complexity
+# Median-in-n-time-complexity
 def median(alist):
    return quickSortHelper(alist,0,len(alist)-1)
 
