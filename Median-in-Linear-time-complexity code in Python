@@ -1,21 +1,29 @@
-# Median-in-n-time-complexity
+f = open('C:\Users\HP PC\Desktop\median.txt', 'r')
+alist = []
+# Better approach to reading lines than in PA1
+for line in f.readlines():
+    alist.append(int(line))
+
 def median(alist):
    return quickSortHelper(alist,0,len(alist)-1)
 
 def quickSortHelper(alist,first,last):
+   if first == last:
+       return alist[first]
    if first<last:
-
+#       print "first = " + str(first) + " last = " + str(last)
        splitpoint = partition(alist,first,last)
+#       print "split point = " + str(splitpoint)
        if splitpoint > (len(alist)//2):
-           quickSortHelper(alist,first,splitpoint-1)
+#           print("going in first half")
+           return quickSortHelper(alist,first,splitpoint-1)
        elif splitpoint < (len(alist)//2):
-           quickSortHelper(alist,splitpoint+1,last)
+#           print("going in second half")
+           return quickSortHelper(alist,splitpoint+1,last)
        else:
-           print (alist[splitpoint])
            return alist[splitpoint]
 
-
-def partition(alist,first,last):       
+def partition(alist,first,last):
    pivotvalue = alist[first]
 
    leftmark = first+1
@@ -40,14 +48,10 @@ def partition(alist,first,last):
            alist[rightmark] = temp
 
    temp = alist[first]
-   alist[first] = alist[rightmark]
-   alist[rightmark] = temp
+   alist[first] = alist[leftmark-1]
+   alist[leftmark-1] = temp
+   return leftmark-1
 
-
-   return rightmark
-   
-   
-## Test Case :
-alist = [54,26,93,17,77,31,44,55,20,14,1,44,22]
-median(alist)
+#alist = [54,26,93,17,77,31,44,25,441,1,1,2,3,4,5,6,7,8,9,55,20,14,1,44,22]
+print median(alist)
 
